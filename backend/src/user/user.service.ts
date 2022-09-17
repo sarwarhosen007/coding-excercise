@@ -1,7 +1,6 @@
-import { ForbiddenException, HttpException, Injectable } from '@nestjs/common';
+import { ForbiddenException, HttpException, Injectable, NotFoundException } from '@nestjs/common';
 import { HttpService } from '@nestjs/axios';
 import { catchError, lastValueFrom, map } from 'rxjs';
-import { orderBy, sortBy } from 'lodash'
 
 @Injectable()
 export class UserService {
@@ -25,12 +24,11 @@ export class UserService {
         }),
       );
      
-    const unmodifiedUsers = await lastValueFrom(usersApiRequest);
-    const users = unmodifiedUsers.map((user: { id: number; nickname: string; link: string; })=>{
+    const usersResult = await lastValueFrom(usersApiRequest);
+    const users = usersResult.map((user: { nickname: string; github_profile: string; })=>{
       return {
-        id: user.id,
         userName: user.nickname,
-        link:user.link
+        gitHubProfileUrl:user.github_profile
       }
     });
 
@@ -69,10 +67,8 @@ export class UserService {
         })
       }
      }
-     return {
-      message:'User Data Not Found'
-     } 
-     
+
+     throw new NotFoundException('User Not Found')
   }
 
 }
