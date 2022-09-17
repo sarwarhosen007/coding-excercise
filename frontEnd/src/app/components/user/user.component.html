@@ -1,0 +1,33 @@
+<mat-toolbar>
+   <span>Github User</span> 
+ </mat-toolbar>
+
+<table mat-table [dataSource]="dataSource" class="mat-elevation-z8">
+    <!-- Name Column -->
+    <ng-container matColumnDef="userName">
+      <th mat-header-cell *matHeaderCellDef> User Name </th>
+      <td mat-cell *matCellDef="let element"> {{element.userName}} </td>
+    </ng-container>
+  
+    <ng-container matColumnDef="gitHubProfileUrl">
+        <th mat-header-cell *matHeaderCellDef>Github Profile</th>
+        <td mat-cell *matCellDef="let element"> <a href="{{element.gitHubProfileUrl}}" target=”_blank”>Visit</a></td>
+     </ng-container>
+
+     <!-- Action Column-->
+    <ng-container matColumnDef="actions">
+        <th mat-header-cell *matHeaderCellDef> Action </th>
+        <td mat-cell *matCellDef="let element"><a [routerLink]="['/user/details',element.userName]" mat-raised-button color="primary">Profile Details</a> </td>
+    </ng-container>
+  
+    <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+    <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+  </table>
+
+  <div *ngIf="isLoading" 
+   style="display: flex; justify-content: center; align-items: center; background: white;">
+    <mat-progress-spinner 
+      color="primary" 
+      mode="indeterminate">
+    </mat-progress-spinner>
+  </div>

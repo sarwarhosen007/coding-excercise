@@ -1,0 +1,62 @@
+<mat-toolbar>
+    <span>User Details</span>
+    <span> <a [routerLink]="['/users']" mat-flat-button color="accent"> Back To Users</a></span> 
+</mat-toolbar>
+
+<mat-tab-group animationDuration="0ms">
+    <mat-tab label="Basic Info">
+        <p><b>User Name</b>: {{userBasicInfo.userName}}</p>
+        <p><b>Github Profile</b>: {{userBasicInfo.githubProfile}}</p>
+        <p><b>Total Contribution</b>: {{userBasicInfo.contributionCount}}</p>
+    </mat-tab>
+    <mat-tab label="Organization">
+        <table mat-table [dataSource]="organisations" class="mat-elevation-z8">
+
+            <ng-container matColumnDef="login">
+              <th mat-header-cell *matHeaderCellDef> Login </th>
+              <td mat-cell *matCellDef="let element"> {{element.login}} </td>
+            </ng-container>
+
+            <ng-container matColumnDef="avatar_url">
+                <th mat-header-cell *matHeaderCellDef> Avatar Url </th>
+                <td mat-cell *matCellDef="let element"> {{element.avatar_url}} </td>
+            </ng-container>
+
+            <ng-container matColumnDef="link">
+                <th mat-header-cell *matHeaderCellDef> Link </th>
+                <td mat-cell *matCellDef="let element"> {{element.link}} </td>
+            </ng-container>
+
+            <tr mat-header-row *matHeaderRowDef="organisationsTableColumn"></tr>
+            <tr mat-row *matRowDef="let row; columns: organisationsTableColumn;"></tr>
+
+        </table>
+
+    </mat-tab>
+    <mat-tab label="Pull requests">
+        <table mat-table [dataSource]="pullRequests" class="mat-elevation-z8">
+
+            <ng-container matColumnDef="title">
+              <th mat-header-cell *matHeaderCellDef> Title </th>
+              <td mat-cell *matCellDef="let element"> {{element.title}} </td>
+            </ng-container>
+
+            <ng-container matColumnDef="repoName">
+                <th mat-header-cell *matHeaderCellDef> Repo Name </th>
+                <td mat-cell *matCellDef="let element"> {{element.repoName}} </td>
+            </ng-container>
+  
+            <tr mat-header-row *matHeaderRowDef="pullRequestsTableColumn"></tr>
+            <tr mat-row *matRowDef="let row; columns: pullRequestsTableColumn;"></tr>
+            
+        </table>
+    </mat-tab>
+  </mat-tab-group>
+
+  <div *ngIf="isLoading" 
+  style="display: flex; justify-content: center; align-items: center; background: white;">
+   <mat-progress-spinner 
+     color="primary" 
+     mode="indeterminate">
+   </mat-progress-spinner>
+ </div>
