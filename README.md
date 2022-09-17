@@ -23,5 +23,9 @@ npm start
 ```shell
 cd coding-excercise/frontEnd
 npm install
+```
+Start the dev server by running the command below. Navigate to http://localhost:4200/. The app will automatically reload if you change any of the source files.
+
+```shell
 ng serve --open
 ```
