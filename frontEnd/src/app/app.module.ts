@@ -15,6 +15,8 @@ import { UserService } from './services/user.service';
 import { MatTableModule } from '@angular/material/table';
 import { UserDetailsComponent } from './components/user-details/user-details.component'
 import {MatTabsModule} from '@angular/material/tabs';
+import { MatPaginatorModule } from '@angular/material/paginator';
+import { MatSortModule } from '@angular/material/sort';
  
 
  
@@ -35,7 +37,9 @@ import {MatTabsModule} from '@angular/material/tabs';
     MatCardModule,
     MatProgressSpinnerModule,
     MatTableModule,
-    MatTabsModule
+    MatTabsModule,
+    MatPaginatorModule,
+    MatSortModule
   ],
   providers: [UserService],
   bootstrap: [AppComponent]
