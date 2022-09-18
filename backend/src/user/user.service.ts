@@ -11,11 +11,22 @@ export class UserService {
     private readonly httpService: HttpService,
   ){} 
 
+/**
+ * Gets users
+ * @returns List Of Users
+ */
+async getUsers() {
 
-  async getUsers() {
-
+    /**
+     * API url for get users
+    */
     const userListApi = this.API_BASE_URL+'users.json';
 
+    /**
+     * 1. HTTP Get request for users
+     * 2. Get First 10 User
+     * 3. Throw ForbiddenExceptin If error Ocure
+     */
     const usersApiRequest =  this.httpService.get(userListApi)
       .pipe(map((res) => res.data?.slice(0,10)))
       .pipe( 
@@ -23,8 +34,12 @@ export class UserService {
           throw new ForbiddenException('API not available');
         }),
       );
-     
     const usersResult = await lastValueFrom(usersApiRequest);
+
+    /**
+     * 1. Map through users data
+     * 2. Get Only nickname & github_profile
+     */
     const users = usersResult.map((user: { nickname: string; github_profile: string; })=>{
       return {
         userName: user.nickname,
@@ -32,6 +47,7 @@ export class UserService {
       }
     });
 
+    //Return The Usesr Data
     return users;
 
   }
@@ -39,12 +55,19 @@ export class UserService {
 /**
  * Gets user
  * @param userName 
- * @returns  
+ * @returns User Details  
  */
 async getUser(userName:string) {
 
+    /**
+     * API url for get user Details
+     */
     const userDetailsApi = `${this.API_BASE_URL}users/${userName}.json`;
 
+    /**
+     * 1. HTTP Get request for User Details
+     * 2. Throw ForbiddenExceptin If error Ocure
+     */
     const userApiRequest = this.httpService.get(userDetailsApi)
       .pipe(map((res) => res.data))
       .pipe( 
@@ -54,7 +77,12 @@ async getUser(userName:string) {
      );
      
     const userInfo = await lastValueFrom(userApiRequest);
-     
+
+    /** 
+     * 1. If user details available?
+     * 2. Sort The PUllRequests using created_at and in descending order
+     * 3. Return The Usere Details
+     */
     if(userInfo){
      return {
         userName:userInfo.nickname,
