@@ -21,10 +21,10 @@ export class UserDetailsComponent implements OnInit {
     contributionCount:'',
   }
   organisations:string[] = [];
-  organisationsTableColumn: string[] = ['login','avatar_url', 'link'];
+  organisationsTableColumn: string[] = ['sl_no','login','avatar_url', 'link'];
  
   pullRequests:string[] = [];
-  pullRequestsTableColumn: string[] = ['title','repoName'];
+  pullRequestsTableColumn: string[] = ['sl_no','created_at','title','repoName'];
  
 
   ngOnInit(): void {

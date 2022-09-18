@@ -17,6 +17,7 @@ export class UserComponent implements OnInit {
   dataSource = this.users;
 
   displayedColumns: string[] = [
+    'sl_no',
     'userName',
     'gitHubProfileUrl',
     "actions"

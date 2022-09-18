@@ -6,35 +6,46 @@
 <mat-tab-group animationDuration="0ms">
     <mat-tab label="Basic Info">
         <p><b>User Name</b>: {{userBasicInfo.userName}}</p>
-        <p><b>Github Profile</b>: {{userBasicInfo.githubProfile}}</p>
+        <p><b>Github Profile</b>:<a href="{{userBasicInfo.githubProfile}}" target=”_blank”> Show Github Profile</a> </p>
         <p><b>Total Contribution</b>: {{userBasicInfo.contributionCount}}</p>
     </mat-tab>
     <mat-tab label="Organization">
         <table mat-table [dataSource]="organisations" class="mat-elevation-z8">
-
-            <ng-container matColumnDef="login">
-              <th mat-header-cell *matHeaderCellDef> Login </th>
-              <td mat-cell *matCellDef="let element"> {{element.login}} </td>
+            <ng-container matColumnDef="sl_no">
+                <th mat-header-cell *matHeaderCellDef> SL No. </th>
+                <td mat-cell *matCellDef="let element; let i = index;"> {{i+1}} </td>
             </ng-container>
 
+            <ng-container matColumnDef="login">
+              <th mat-header-cell *matHeaderCellDef> Name </th>
+              <td mat-cell *matCellDef="let element"> {{element.login}} </td>
+            </ng-container> 
+
             <ng-container matColumnDef="avatar_url">
-                <th mat-header-cell *matHeaderCellDef> Avatar Url </th>
-                <td mat-cell *matCellDef="let element"> {{element.avatar_url}} </td>
+                <th mat-header-cell *matHeaderCellDef> Avatar </th> 
+                <td mat-cell *matCellDef="let element"> <a href="{{element.avatar_url}}" target=”_blank”>Show Avatar</a> </td>
             </ng-container>
 
             <ng-container matColumnDef="link">
                 <th mat-header-cell *matHeaderCellDef> Link </th>
-                <td mat-cell *matCellDef="let element"> {{element.link}} </td>
+                <td mat-cell *matCellDef="let element"><a href="{{element.link}}" target=”_blank”>Visit</a> </td>
             </ng-container>
 
             <tr mat-header-row *matHeaderRowDef="organisationsTableColumn"></tr>
             <tr mat-row *matRowDef="let row; columns: organisationsTableColumn;"></tr>
-
         </table>
-
     </mat-tab>
     <mat-tab label="Pull requests">
         <table mat-table [dataSource]="pullRequests" class="mat-elevation-z8">
+            <ng-container matColumnDef="sl_no">
+                <th mat-header-cell *matHeaderCellDef> SL No. </th>
+                <td mat-cell *matCellDef="let element; let i = index;"> {{i+1}} </td>
+            </ng-container>
+
+            <ng-container matColumnDef="created_at">
+                <th mat-header-cell *matHeaderCellDef> Created At </th>
+                <td mat-cell *matCellDef="let element"> {{element.created_at}} </td>
+              </ng-container>
 
             <ng-container matColumnDef="title">
               <th mat-header-cell *matHeaderCellDef> Title </th>
