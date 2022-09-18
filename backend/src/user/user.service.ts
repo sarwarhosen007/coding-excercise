@@ -36,7 +36,12 @@ export class UserService {
 
   }
 
-  async getUser(userName:string) {
+/**
+ * Gets user
+ * @param userName 
+ * @returns  
+ */
+async getUser(userName:string) {
 
     const userDetailsApi = `${this.API_BASE_URL}users/${userName}.json`;
 
@@ -62,7 +67,8 @@ export class UserService {
         }).map(eachPullRequest=>{
           return {
             title:eachPullRequest.title,
-            repoName:eachPullRequest.repo_name
+            repoName:eachPullRequest.repo_name,
+            created_at:eachPullRequest.created_at
           }
         })
       }
